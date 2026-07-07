@@ -6,7 +6,6 @@ export type ArticleFrontmatter = {
   title: string;
   date: string;
   contributors: string[];
-  tldr: string;
 };
 
 export type Article = {

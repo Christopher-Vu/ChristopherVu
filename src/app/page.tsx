@@ -9,7 +9,12 @@ export default function Home() {
     <PageShell>
       <Header />
       <About />
-      <EntrySection title="Work" entries={getEntriesBySection("work")} />
+      <EntrySection
+        title="Work"
+        entries={getEntriesBySection("work")}
+        showHint
+        preExpandFirst
+      />
       <EntrySection title="Projects" entries={getEntriesBySection("project")} />
     </PageShell>
   );

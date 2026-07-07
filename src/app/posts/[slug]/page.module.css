@@ -1,0 +1,58 @@
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.meta {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+.body {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.body :global(p) {
+  margin-bottom: 20px;
+}
+
+.body :global(h2) {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 32px 0 12px;
+}
+
+.body :global(h3) {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 24px 0 10px;
+}
+
+.body :global(strong) {
+  font-weight: 700;
+}
+
+.body :global(svg) {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 32px 0;
+}
+
+.body :global(a) {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.body :global(a:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.body :global(sup) {
+  font-size: 12px;
+}

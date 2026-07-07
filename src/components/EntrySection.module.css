@@ -5,6 +5,7 @@
 .headerRow {
   display: flex;
   align-items: baseline;
+  justify-content: space-between;
   gap: 8px;
   margin-bottom: 16px;
 }
@@ -14,9 +15,41 @@
   font-weight: 700;
 }
 
-.viewToggle {
+.orderBy {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
   font-size: 14px;
   color: var(--text-muted);
+}
+
+.orderByOption,
+.orderByActive {
+  background: none;
+  border: none;
+  padding: 10px 2px;
+  margin: -10px 0;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.orderByOption:focus-visible,
+.orderByActive:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.orderByActive {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
 }
 
 .list {
@@ -26,35 +59,21 @@
   gap: 4px;
 }
 
-.entry {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.entryTitleRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.chevron {
-  color: var(--text-muted);
+.loadMore {
+  display: block;
+  margin: 6px 0 0;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  font: inherit;
   font-size: 14px;
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 
-.contributors {
-  font-size: 14px;
-  margin-top: 4px;
-}
-
-.owner {
-  font-weight: 700;
-}
-
-.meta {
-  font-size: 14px;
-  color: var(--text-muted);
-  margin-top: 2px;
+.loadMore:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }

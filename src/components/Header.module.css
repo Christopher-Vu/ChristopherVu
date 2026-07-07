@@ -6,6 +6,18 @@
   margin-bottom: 48px;
 }
 
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.photo {
+  border-radius: 0;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .name {
   font-size: 28px;
   font-weight: 700;
@@ -25,7 +37,22 @@
 }
 
 .socials a {
+  display: inline-block;
+  padding: 10px 0;
+  margin: -10px 0;
   color: var(--link);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.socials a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .identity {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
