@@ -14,7 +14,11 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@mdx-js/react": "^3.1.1",
+    "@types/mdx": "^2.0.14",
+    "gray-matter": "^4.0.3",
     "next": "16.2.10",
+    "next-mdx-remote": "^6.0.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
