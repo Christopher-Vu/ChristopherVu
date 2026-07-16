@@ -30,13 +30,19 @@ High-level implementation order. Phases, not tickets. Each phase is buildable on
    the Work section, a one-line muted micro-hint under the first section header, and pointer/hover
    feedback on entries.
 
-7. **Selected / All toggles**
-   Independent per-section view switch inline with each section header; swaps the visible entry set
-   without navigating.
+7. **Load more + order-by controls**
+   Independent per-section controls inline with each section header, both swapping the visible
+   entry set in place without navigating:
+   - **Order-by** (Selected / Date): Selected is the curated order (default on load); Date sorts
+     newest-first.
+   - **Load more**: collapsed view shows the top N entries (named constant, default 3) of
+     whichever order is active; toggles to the full list. Switching order-by while expanded
+     re-sorts the full list; switching while collapsed re-picks the top N under the new order.
 
 8. **Article page template**
    Back/home link (top-left) + theme toggle (top-right), title, meta line (date · contributors),
-   bordered TL;DR box, MDX body with bold lead-ins, and inline colorful SVG diagrams.
+   MDX body with bold lead-ins, and inline colorful SVG diagrams. No TL;DR box — the entry's
+   expand-panel summary on the landing page already covers that.
 
 9. **Responsive & accessibility pass**
    Mobile side padding, tap targets ≥40px, visible focus states, diagrams at `width:100%` with no

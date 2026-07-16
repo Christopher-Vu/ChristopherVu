@@ -17,20 +17,20 @@ export function Header() {
         />
         <div>
           <p className={styles.name}>{OWNER_NAME}</p>
-          <p className={styles.contact}>you [at] example [dot] com</p>
+          <p className={styles.contact}>christopher [dot] vu [at] berkeley [dot] edu</p>
           <div className={styles.socials}>
             <a
-              href="https://github.com/"
+              href="https://github.com/Christopher-Vu"
               target="_blank"
               rel="noopener noreferrer"
             >
               GitHub
             </a>
-            <a href="https://x.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://x.com/ChrisMV12799418" target="_blank" rel="noopener noreferrer">
               X
             </a>
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/chrismichaelvu/"
               target="_blank"
               rel="noopener noreferrer"
             >

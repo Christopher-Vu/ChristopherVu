@@ -22,7 +22,8 @@ Content is data, kept separate from markup.
     contributors: string[];   // owner's name flagged/bolded on render
     source: string;           // "NeurIPS 2026", "Berkeley DSS × AMD", etc.
     year: string;
-    selected: boolean;        // shown in the "Selected" view
+    date: string;             // ISO date, used for the "Date" order
+    order: number;            // curated rank within its section (lower = earlier)
     section: "work" | "project";
     summary: string;          // 2–4 sentences, shown on expand
     links: {
@@ -36,9 +37,9 @@ Content is data, kept separate from markup.
   ```
 
 - **Articles** — authored as **MDX** files keyed by slug, e.g. `content/posts/<slug>.mdx`, one file
-  per article. Frontmatter carries `{ title, date, contributors, tldr }`; the MDX body holds the
-  prose. MDX lets diagrams be inline SVG or small React components while staying colorful in both
-  themes.
+  per article. Frontmatter carries `{ title, date, contributors }`; the MDX body holds the prose.
+  No TL;DR box — that would duplicate the entry's expand-panel summary shown on the landing page.
+  MDX lets diagrams be inline SVG or small React components while staying colorful in both themes.
 
 ## Styling
 
@@ -57,7 +58,11 @@ Content is data, kept separate from markup.
 Minimal client components only:
 
 - Entry expand/collapse (hover-preview on desktop, click-to-pin, tap on mobile, keyboard toggle).
-- Per-section Selected/All view toggle (independent per section).
+- Per-section **order-by** switch (Selected ↔ Date), independent per section. Selected is the
+  curated `order` rank; Date sorts newest-first by `date`.
+- Per-section **"Load more"** control: collapsed view shows the top N entries (named constant,
+  default 3) of whichever order is active; expands in place to the full list. No navigation, no
+  Selected/All duality — order-by and list-length are separate, independent controls.
 - Theme toggle (persist + `prefers-color-scheme`).
 
 Everything else is server-rendered/static.

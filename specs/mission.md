@@ -51,6 +51,9 @@ background, muted accents.
 - Multiple entries may be pinned open simultaneously.
 - The first-entry-pre-expanded hint applies to the **Work** section only.
 - Name, email, and social handles are placeholders until real values are supplied.
+- Per-section entry list starts collapsed to the top N (default N = 3, a named
+  constant) of whichever order is active, with a **"Load more"** control to reveal
+  the rest; order defaults to **curated (Selected)** on load.
 
 See [roadmap](./roadmap.md) for build order and [tech-stack](./tech-stack.md) for committed
 technology choices.
