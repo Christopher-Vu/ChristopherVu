@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import Link from "next/link";
 import type { Entry } from "@/content/entries";
 import { OWNER_NAME } from "@/content/entries";
@@ -21,16 +21,10 @@ export function EntryItem({
   defaultPinned?: boolean;
 }) {
   const [pinned, setPinned] = useState(defaultPinned);
+  const panelId = useId();
 
   function togglePinned() {
     setPinned((current) => !current);
-  }
-
-  function handleKeyDown(event: React.KeyboardEvent<HTMLLIElement>) {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      togglePinned();
-    }
   }
 
   const linkEntries = Object.entries(entry.links).filter(
@@ -41,15 +35,22 @@ export function EntryItem({
     <li
       className={`${styles.entry} ${pinned ? styles.pinned : ""}`}
       onClick={togglePinned}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-      role="button"
-      aria-expanded={pinned}
     >
-      <div className={styles.entryTitleRow}>
+      <button
+        type="button"
+        className={styles.entryToggle}
+        onClick={(event) => {
+          event.stopPropagation();
+          togglePinned();
+        }}
+        aria-expanded={pinned}
+        aria-controls={panelId}
+      >
         <span>{entry.title}</span>
-        <span className={styles.chevron}>⌄</span>
-      </div>
+        <span className={styles.chevron} aria-hidden="true">
+          ⌄
+        </span>
+      </button>
       <p className={styles.contributors}>
         {entry.contributors.map((contributor, index) => (
           <span key={contributor}>
@@ -65,7 +66,7 @@ export function EntryItem({
       <p className={styles.meta}>
         {entry.source} · {entry.year}
       </p>
-      <div className={styles.panel}>
+      <div className={styles.panel} id={panelId}>
         <div className={styles.panelInner}>
           <p className={styles.summary}>{entry.summary}</p>
           {linkEntries.length > 0 && (
