@@ -24,7 +24,7 @@ I thought it best to split this process into two stages.
 - Stage one: Analyze each cross-build pattern pair on 1) Jaccard similarity over the sets of operation names and 2) Levenshtein similarity over the ordered sequences, then score by weighted sum (70/30 by default). 'Successful' matches are determined with a greedy bipartite assignment picking the best non-conflicting matches above a threshold, with similarity scores (+Jaccard/Levenshtein) shared in case other pairs need to be inspected.
 - Stage two: On any set of pairs that the analyst wishes to inspect, a suite of procedural comparisons are generated (per-pattern timing delta, a per-operation duration diff table, and a waterfall chart of per-op deltas).
 
-**Results** This setup matched high confidence (>0.78) scores on almost all traces (even in MoE builds), and revealed >70k kernels present in some build patterns but absent in others. AutoViz<sup>[1]</sup> became the standard trace ingestion method for our 8 person team, processing over 12M kernels.
+**Results** This setup matched high confidence (>0.78) scores on almost all traces (even in MoE builds), and revealed >70k kernels present in some build patterns but absent in others. AutoViz<Ref id="1" /> became the standard trace ingestion method for our 8 person team, processing over 12M kernels.
 
 <ArticleFigure
   name="diagram-2"
@@ -43,10 +43,21 @@ I thought it best to split this process into two stages.
 - Architecture: Strided Conv1d encoder (2→16→32 channels, k=5, stride=2) followed by a 1 channel bottleneck (32→1; ~8x compressed latent space. strided rather than max pooling, as the latter leads to outlier kernels reconstructing too accurately). The decoder mirrors the encoder with NN upsampling. 9k parameters was the sweet spot in testing for fitting patterns well without reconstructing outliers.
 - Loss: (Masked) reconstruction error over the two channels, with runs flagged on the maximum per-position standardized error (max not mean, so that extreme kernels aren't diluted by normal ones). As a result of our input representation, the anomalous kernel is easy to identify, as well as whether its run time or idle time is anomalous. Theshold is set to the 2% validation FPR mark.
 
-**Results** Unfortunately, there's no ground truth for truly 'anomalous' runs, but we can get close with synthetic patterns. Using real trace patterns, 500 of each of the following anomalous pattern types were generated and compiled into an evaluation, yielding promising results from the autoencoder: magnitude spike (pick one kernel at random and quintuple<sup>[2]</sup> its length, recall 100%), idle stall (add 5 microseconds to a kernel's idle time, recall 98.4%), swap (swap two kernels 3 positions apart, recall 100%), broad drift (multiply all kernel runtimes by 1.1x, recall 69.4%).
+**Results** Unfortunately, there's no ground truth for truly 'anomalous' runs, but we can get close with synthetic patterns. Using real trace patterns, 500 of each of the following anomalous pattern types were generated and compiled into an evaluation, yielding promising results from the autoencoder: magnitude spike (pick one kernel at random and quintuple<Ref id="2" /> its length, recall 100%), idle stall (add 5 microseconds to a kernel's idle time, recall 98.4%), swap (swap two kernels 3 positions apart, recall 100%), broad drift (multiply all kernel runtimes by 1.1x, recall 69.4%).
 
-<hr />
-
-<sup>[1]</sup> *Aside: 'AutoAnal' was my first name for this functionality, short for auto-analyze. I switched the name to AutoViz for obvious reasons.*
-
-<sup>[2]</sup> *As unrealistic as this sounds, a quintuple wall time kernel was not unusual. This was more of a sanity test (ensure that we don't lose the 2σ test functionality), whereas the real stress test for this model was the broad drift eval.*
+<Footnotes>
+  <Footnote id="1">
+    <em>
+      Aside: 'AutoAnal' was my first name for this functionality, short for
+      auto-analyze. I switched the name to AutoViz for obvious reasons.
+    </em>
+  </Footnote>
+  <Footnote id="2">
+    <em>
+      As unrealistic as this sounds, a quintuple wall time kernel was not
+      unusual. This was more of a sanity test (ensure that we don't lose the 2σ
+      test functionality), whereas the real stress test for this model was the
+      broad drift eval.
+    </em>
+  </Footnote>
+</Footnotes>
