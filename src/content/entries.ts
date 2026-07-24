@@ -40,18 +40,18 @@ export const entries: Entry[] = [
     article: "sample-article",
   },
   {
-    title: "Another Piece of Work",
-    contributors: ["Christopher Vu"],
+    title:
+      "Trace Analysis and Learned Kernel Regression Detection on LLM Inference Workloads",
+    contributors: ["Christopher Vu", "DSS", "AMD"],
     source: "Berkeley DSS x AMD",
     year: "2026",
-    date: "2026-02-15",
+    date: "2026-04-01",
     order: 1,
     section: "work",
     summary:
-      "Placeholder summary describing the second entry. Two to four sentences covering motivation, method, and outcome.",
-    links: {
-      demo: "https://example.com/demo",
-    },
+      "A system that ingests two GPU inference traces (millions of kernel events), detects repeating kernel patterns, matches them across builds, and flags performance regressions with both procedural and learned (1D conv autoencoder) anomaly detection. Adopted as the team's standard trace ingestion tool across 12M+ kernels.",
+    links: {},
+    article: "amd-dss-trace-analysis",
   },
   {
     title: "Older Work Sample",

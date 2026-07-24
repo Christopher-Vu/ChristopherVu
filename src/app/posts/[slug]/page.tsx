@@ -4,10 +4,12 @@ import { ArticleHeader } from "@/components/ArticleHeader";
 import { PageShell } from "@/components/PageShell";
 import { getArticleBySlug, getArticleSlugs } from "@/content/articles";
 import { SampleDiagram } from "@/components/diagrams/SampleDiagram";
+import { ArticleFigure } from "@/components/diagrams/ArticleFigure";
 import styles from "./page.module.css";
 
 const mdxComponents = {
   SampleDiagram,
+  ArticleFigure,
 };
 
 export async function generateStaticParams() {
