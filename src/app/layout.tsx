@@ -3,6 +3,7 @@ import { ThemeScript } from "@/components/ThemeScript";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://chrisvu.dev"),
   title: "Christopher Vu",
   description: "Personal website of Christopher Vu.",
 };

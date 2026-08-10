@@ -36,6 +36,13 @@ export function Header() {
             >
               LinkedIn
             </a>
+            <a
+              href="/ChristopherVuResume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Resume
+            </a>
           </div>
         </div>
       </div>

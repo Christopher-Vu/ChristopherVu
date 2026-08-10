@@ -10,6 +10,13 @@
   border-radius: 6px;
 }
 
+/* Borderless, padded variant for transparent vector diagrams. */
+.plain {
+  border: none;
+  border-radius: 0;
+  padding: 24px;
+}
+
 /* Show the image matching the active theme; ThemeScript sets data-theme
    pre-hydration, so exactly one is painted from the start. Default to light. */
 .dark {

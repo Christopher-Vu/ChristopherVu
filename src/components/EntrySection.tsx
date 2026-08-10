@@ -22,12 +22,10 @@ export function EntrySection({
   title,
   entries,
   showHint = false,
-  preExpandFirst = false,
 }: {
   title: string;
   entries: Entry[];
   showHint?: boolean;
-  preExpandFirst?: boolean;
 }) {
   const [orderBy, setOrderBy] = useState<OrderBy>("selected");
   const [expanded, setExpanded] = useState(false);
@@ -73,12 +71,8 @@ export function EntrySection({
         <p className={styles.hint}>· click any entry to expand</p>
       )}
       <ul className={styles.list}>
-        {visibleEntries.map((entry, index) => (
-          <EntryItem
-            key={entry.title}
-            entry={entry}
-            defaultPinned={preExpandFirst && index === 0}
-          />
+        {visibleEntries.map((entry) => (
+          <EntryItem key={entry.title} entry={entry} />
         ))}
       </ul>
       {canLoadMore && (

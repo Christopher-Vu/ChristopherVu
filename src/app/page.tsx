@@ -13,9 +13,10 @@ export default function Home() {
         title="Work"
         entries={getEntriesBySection("work")}
         showHint
-        preExpandFirst
       />
-      <EntrySection title="Projects" entries={getEntriesBySection("project")} />
+      {/* Projects section hidden for now — re-enable once real projects
+          replace the placeholders in src/content/entries.ts */}
+      {/* <EntrySection title="Projects" entries={getEntriesBySection("project")} /> */}
     </PageShell>
   );
 }

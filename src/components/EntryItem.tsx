@@ -11,16 +11,13 @@ const LINK_LABELS: Record<keyof Entry["links"], string> = {
   arxiv: "arXiv",
   demo: "Demo",
   paper: "Paper",
+  x: "X",
+  dataset: "Dataset",
+  models: "Models",
 };
 
-export function EntryItem({
-  entry,
-  defaultPinned = false,
-}: {
-  entry: Entry;
-  defaultPinned?: boolean;
-}) {
-  const [pinned, setPinned] = useState(defaultPinned);
+export function EntryItem({ entry }: { entry: Entry }) {
+  const [pinned, setPinned] = useState(false);
   const panelId = useId();
 
   function togglePinned() {
@@ -28,7 +25,9 @@ export function EntryItem({
   }
 
   const linkEntries = Object.entries(entry.links).filter(
-    ([, url]) => url,
+    // arXiv renders as its own "read more" button below, so keep it out of the
+    // inline link row.
+    ([key, url]) => url && key !== "arxiv",
   ) as [keyof Entry["links"], string][];
 
   return (
@@ -93,6 +92,17 @@ export function EntryItem({
             >
               read more (article) →
             </Link>
+          )}
+          {entry.links.arxiv && (
+            <a
+              href={entry.links.arxiv}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.readMore}
+              onClick={(event) => event.stopPropagation()}
+            >
+              read more (arXiv) →
+            </a>
           )}
         </div>
       </div>

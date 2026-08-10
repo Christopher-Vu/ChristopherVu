@@ -1,7 +1,7 @@
 ---
-title: "Trace Analysis and Learned Kernel Regression Detection on LLM Inference Workloads"
+title: "AutoViz: GPU Trace Analysis on LLM Inference Workloads"
 date: "2026-04-01"
-contributors: ["Christopher Vu", "DSS", "AMD"]
+contributors: ["Christopher Vu", "AMD Silo AI Team"]
 ---
 
 I share trace analysis architecture in this article. Specific results are omitted under NDA.
@@ -14,6 +14,8 @@ I share trace analysis architecture in this article. Specific results are omitte
 
 <ArticleFigure
   name="diagram-1"
+  ext="svg"
+  plain
   alt="Pattern detection schematic showing a repeating kernel subsequence bracketed as a pattern, with each event annotated by pattern name and position across multiple aligned ranks."
 />
 
@@ -26,16 +28,18 @@ I thought it best to split this process into two stages.
 
 **Results** This setup matched high confidence (>0.78) scores on almost all traces (even in MoE builds), and revealed >70k kernels present in some build patterns but absent in others. AutoViz<Ref id="1" /> became the standard trace ingestion method for our 8 person team, processing over 12M kernels.
 
-<ArticleFigure
-  name="diagram-2"
-  alt="Two-stage matching architecture: build A and build B patterns scored by Jaccard over op sets and Levenshtein over op sequences into a 70/30 weighted score, greedy bipartite assignment producing candidate pairs, then analyst review feeding stage two timing deltas, per-op diff table, and waterfall comparison."
-/>
-
 ## Procedural and Learned Anomaly Detection
 
 **Procedural Baseline** With matched patterns, regression detection can be operationally defined in two parts: find abnormally slow patterns, and localize blame to specific kernels. I define a run as one contiguous pattern execution on a given rank. As a baseline, runs are flagged beyond 2σ of their (pattern, rank) group mean (flag rates ran between 0.1–2.9% per combo), then each kernel duration is compared against the median of σ-normal runs at the same position.
 
 **AutoEncoder** This provides a good baseline, but kernel runs can be anomalous while having features inside their 2σ threshold. Catching these requires modeling the normal ‘shape’ of a run rather than its summary statistics. Thus, we train a 1d convolutional autoencoder on run-level data, using reconstruction error to attribute individual kernels.
+
+<ArticleFigure
+  name="diagram-2"
+  ext="svg"
+  plain
+  alt="Two-stage matching architecture: build A and build B patterns scored by Jaccard over op sets and Levenshtein over op sequences into a 70/30 weighted score, greedy bipartite assignment producing candidate pairs, then analyst review feeding stage two timing deltas, per-op diff table, and waterfall comparison."
+/>
 
 - Input Representation: Each run becomes a two channel kernel sequence: log1p duration, log1p idle time.
 - Scope and Norm: One model per (build, scenario, pattern), trained on σ-normal runs. Channels are MAD scaled (due to the heavy tails), fit only on σ-normal runs.
